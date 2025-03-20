@@ -8,8 +8,8 @@ function getComputerChoice () {
         return rock;
     } else if (Math.floor(Math.random() * 3 + 1) == 2) {
         return paper;
-    } else {
-        return scissor;
+    } else if (Math.floor(Math.random() * 3 + 1) == 3) {
+        return paper;
     }
 }
 
@@ -42,7 +42,7 @@ function playRound(humanChoice, computerChoice) {
        resultMessage = "You Win! Rock beats Scissor.";
        
     } else if (humanChoice === rock && computerChoice === rock){
-    resultMessage = "Both chose rock, play again.";
+    resultMessage = "Both chose rock.";
   
 
     } else if (humanChoice === paper && computerChoice === scissor){
@@ -54,7 +54,7 @@ function playRound(humanChoice, computerChoice) {
        resultMessage = "You Win! Paper beats Rock.";
        
     } else if (humanChoice === paper && computerChoice === paper){
-    resultMessage = "Both chose Paper, play again.";
+    resultMessage = "Both chose Paper.";
     
 
     } else if (humanChoice === scissor && computerChoice === rock){
@@ -66,7 +66,7 @@ function playRound(humanChoice, computerChoice) {
         resultMessage = "You Win! Scissor beats Papper.";
        
     } else if (humanChoice === scissor && computerChoice === scissor){
-   resultMessage = "Both chose Scissor, play again.";
+   resultMessage = "Both chose Scissor.";
     
     }
 
@@ -78,12 +78,29 @@ alert(`Human: ${humanScore}\nMachine: ${computerScore}`);
 }
 
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-console.log(playRound(humanSelection, computerSelection));
 
 
+function playGame() {
+        
+    playRound (getHumanChoice(), getComputerChoice());
+    playRound (getHumanChoice(), getComputerChoice());
+    playRound (getHumanChoice(), getComputerChoice());
+    playRound (getHumanChoice(), getComputerChoice());
+    playRound (getHumanChoice(), getComputerChoice());
+
+   
+   if (humanScore < computerScore) {
+    alert ("You Lose!");
+   } else if (humanScore > computerScore) {
+    alert ("You Win");
+   } else {
+    alert ("You Tied!");
+   }
+
+}
+
+
+playGame()
 
 
 
