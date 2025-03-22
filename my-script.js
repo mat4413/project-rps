@@ -4,12 +4,12 @@ const scissor = "Scissor";
 
 
 function getComputerChoice () {
-    if (Math.floor(Math.random() * 3 + 1) == 1) {
+    if (Math.floor(Math.random() * 3 + 1) === 1) {
         return rock;
-    } else if (Math.floor(Math.random() * 3 + 1) == 2) {
+    } else if (Math.floor(Math.random() * 3 + 1) === 2) {
         return paper;
-    } else if (Math.floor(Math.random() * 3 + 1) == 3) {
-        return paper;
+    } else {
+        return scissor;
     }
 }
 
@@ -19,9 +19,13 @@ function getHumanChoice () {
         return rock;
     } else if (choice == "Paper" || choice == "paper") {
         return paper;
-    } else {
+    } else if (choice == "Scissor" 
+        || choice == "scissor" 
+        || choice == "scissors"
+        || choice == "Scissors") {
         return scissor;
     }
+
 
 }
 
@@ -47,7 +51,7 @@ function playRound(humanChoice, computerChoice) {
 
     } else if (humanChoice === paper && computerChoice === scissor){
         computerScore += 1;
-        resultMessage = alert("You lose! Scissor beats Paper.");
+        resultMessage = "You lose! Scissor beats Paper.";
         
     } else if (humanChoice === paper && computerChoice === rock){
         humanScore += 1;
@@ -71,9 +75,7 @@ function playRound(humanChoice, computerChoice) {
     }
 
 alert(resultMessage);
-alert(`Human: ${humanScore}\nMachine: ${computerScore}`);
-
-
+alert(`Human: ${humanScore}\nMachine: ${computerScore}`)
 
 }
 
