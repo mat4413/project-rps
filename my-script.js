@@ -1,6 +1,6 @@
-const rock = "Rock";
-const paper = "Paper";
-const scissor = "Scissor";
+const rock = "rock";
+const paper = "paper";
+const scissor = "scissor";
 
 
 function getComputerChoice () {
@@ -13,21 +13,21 @@ function getComputerChoice () {
     }
 }
 
-function getHumanChoice () {
-    let choice = prompt("Choose Rock, Paper, or Scissors.");
-    if (choice == "Rock" || choice == "rock") {
-        return rock;
-    } else if (choice == "Paper" || choice == "paper") {
-        return paper;
-    } else if (choice == "Scissor" 
-        || choice == "scissor" 
-        || choice == "scissors"
-        || choice == "Scissors") {
-        return scissor;
-    }
+// function getHumanChoice () {
+//     let choice = prompt("Choose Rock, Paper, or Scissors.");
+//     if (choice == "Rock" || choice == "rock") {
+//         return rock;
+//     } else if (choice == "Paper" || choice == "paper") {
+//         return paper;
+//     } else if (choice == "Scissor" 
+//         || choice == "scissor" 
+//         || choice == "scissors"
+//         || choice == "Scissors") {
+//         return scissor;
+//     }
 
 
-}
+// }
 
 
 let humanScore = 0;
@@ -37,7 +37,8 @@ function playRound(humanChoice, computerChoice) {
 
     let resultMessage = ""
 
-    if (humanChoice === rock && computerChoice === paper){
+    if (humanChoice === rock 
+        && computerChoice === paper){
         computerScore += 1;
         resultMessage = "You lose! Paper beats Rock.";
        
@@ -102,11 +103,17 @@ function playGame() {
 }
 
 
-playGame()
+// playGame()
 
 
+const buttons = document.querySelectorAll("button");
 
-
+buttons.forEach((button) => {
+    button.addEventListener ("click", () => {
+        const humanChoice = button.id;
+        playRound (humanChoice, getComputerChoice());
+    });
+});
 
 
 
