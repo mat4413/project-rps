@@ -1,6 +1,6 @@
 const rock = "rock";
 const paper = "paper";
-const scissor = "scissor";
+const scissors = "scissors";
 
 
 function getComputerChoice () {
@@ -9,7 +9,7 @@ function getComputerChoice () {
     } else if (Math.floor(Math.random() * 3 + 1) === 2) {
         return paper;
     } else {
-        return scissor;
+        return scissors;
     }
 }
 
@@ -23,7 +23,7 @@ function getComputerChoice () {
 //         || choice == "scissor" 
 //         || choice == "scissors"
 //         || choice == "Scissors") {
-//         return scissor;
+//         return scissors;
 //     }
 
 
@@ -42,7 +42,7 @@ function playRound(humanChoice, computerChoice) {
         computerScore += 1;
         resultMessage = "You lose! Paper beats Rock.";
        
-    } else if (humanChoice === rock && computerChoice === scissor){
+    } else if (humanChoice === rock && computerChoice === scissors){
         humanScore += 1;
        resultMessage = "You Win! Rock beats Scissor.";
        
@@ -50,7 +50,7 @@ function playRound(humanChoice, computerChoice) {
     resultMessage = "Both chose rock.";
   
 
-    } else if (humanChoice === paper && computerChoice === scissor){
+    } else if (humanChoice === paper && computerChoice === scissors){
         computerScore += 1;
         resultMessage = "You lose! Scissor beats Paper.";
         
@@ -62,45 +62,45 @@ function playRound(humanChoice, computerChoice) {
     resultMessage = "Both chose Paper.";
     
 
-    } else if (humanChoice === scissor && computerChoice === rock){
+    } else if (humanChoice === scissors && computerChoice === rock){
         computerScore += 1;
         resultMessage = "You lose! Rock beats Scissor.";
        
-    } else if (humanChoice === scissor && computerChoice === paper){
+    } else if (humanChoice === scissors && computerChoice === paper){
         humanScore += 1;
-        resultMessage = "You Win! Scissor beats Papper.";
+        resultMessage = "You Win! Scissor beats Paper.";
        
-    } else if (humanChoice === scissor && computerChoice === scissor){
+    } else if (humanChoice === scissors && computerChoice === scissors){
    resultMessage = "Both chose Scissor.";
     
     }
 
-alert(resultMessage);
-alert(`Human: ${humanScore}\nMachine: ${computerScore}`)
+return resultMessage;
+// alert(`Human: ${humanScore}\nMachine: ${computerScore}`)
 
 }
 
 
 
 
-function playGame() {
+// function playGame() {
         
-    playRound (getHumanChoice(), getComputerChoice());
-    playRound (getHumanChoice(), getComputerChoice());
-    playRound (getHumanChoice(), getComputerChoice());
-    playRound (getHumanChoice(), getComputerChoice());
-    playRound (getHumanChoice(), getComputerChoice());
+//     playRound (getHumanChoice(), getComputerChoice());
+//     playRound (getHumanChoice(), getComputerChoice());
+//     playRound (getHumanChoice(), getComputerChoice());
+//     playRound (getHumanChoice(), getComputerChoice());
+//     playRound (getHumanChoice(), getComputerChoice());
 
    
-   if (humanScore < computerScore) {
-    alert ("You Lose!");
-   } else if (humanScore > computerScore) {
-    alert ("You Win");
-   } else {
-    alert ("You Tied!");
-   }
+//    if (humanScore < computerScore) {
+//     alert ("You Lose!");
+//    } else if (humanScore > computerScore) {
+//     alert ("You Win");
+//    } else {
+//     alert ("You Tied!");
+//    }
 
-}
+// }
 
 
 // playGame()
@@ -108,12 +108,89 @@ function playGame() {
 
 const buttons = document.querySelectorAll("button");
 
+
+
 buttons.forEach((button) => {
     button.addEventListener ("click", () => {
         const humanChoice = button.id;
-        playRound (humanChoice, getComputerChoice());
+
+        const message = playRound (humanChoice, getComputerChoice());
+    
+        const tScore = document.querySelector("#totalScore");
+        
+        
+        tScore.textContent = `Player: ${humanScore} - Machine: ${computerScore}`
+
+                
+        const round = document.createElement("li");
+        
+        round.textContent = message;
+
+        const list = document.querySelector("ul");
+
+        list.appendChild(round);
+
+        
+        const finalScore = document.querySelector("#finalScore");
+        
+        if (humanScore === 5) {
+
+            finalScore.textContent = "You Win";
+
+        } else if (computerScore === 5){
+
+            finalScore.textContent = "You Lose";
+
+                  
+
+        };
+
+        if (humanScore === 5 || computerScore === 5) {
+
+            buttons.forEach((button) => {
+                button.disabled = true;
+            });  
+
+
+            const reset = document.querySelector("#reset");
+
+            const newGame = document.createElement("h2");
+            newGame.textContent = "New Match?";
+            reset.appendChild(newGame);
+
+            const resetButton = document.createElement("button");
+            resetButton.textContent = "YES!";
+
+            reset.appendChild(resetButton);
+
+
+            resetButton.addEventListener ("click", () => {
+
+                humanScore = 0;
+                computerScore = 0;
+                tScore.textContent = `Player: ${humanScore} - Machine: ${computerScore}`;
+        finalScore.textContent = "";
+                list.innerHTML = "";
+                reset.innerHTML = "";
+                buttons.forEach((button) => {
+                    button.disabled = false;
+                });
+
+
+
+            });
+
+            }
+
+
+            
+
+    
     });
 });
+
+
+
 
 
 
